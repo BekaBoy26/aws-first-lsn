@@ -33,6 +33,15 @@ const auditories = [
 ];
 
 const server = http.createServer((req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  if (req.method === "OPTIONS") {
+    res.writeHead(204);
+    return res.end();
+  }
+
   if (req.url === "/" && req.method === "GET") {
     return res.end("Hello world, server from Bael");
   } else if (req.url === "/students" && req.method === "GET") {
